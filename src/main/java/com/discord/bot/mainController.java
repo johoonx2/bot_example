@@ -8,7 +8,7 @@ import de.btobastian.javacord.listener.message.MessageCreateListener;
 
 public class mainController {
     static public void main(String args[]){
-        DiscordAPI api = Javacord.getApi("NTA0MjI4ODM4NjU0NjA3Mzcx.DrCBGA.ezxMab1jKY8GH3M3HA6jrxNSwWw", true);
+        DiscordAPI api = Javacord.getApi("NTA0MjI4ODM4NjU0NjA3Mzcx.DrG2Aw.7FUV_2YF4JJo8imPTLAkO9azhUw", true);
         api.connect(new FutureCallback<DiscordAPI>() {
             public void onSuccess(final DiscordAPI api) {
                 api.registerListener(new MessageCreateListener() {
