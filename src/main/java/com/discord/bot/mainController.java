@@ -45,9 +45,19 @@ public class mainController {
                         cmd = cmd.replace(" ", "");
                         String[] command = cmd.split("#");
 
-                        if(command[0].equals(typeController.SADARI_DEFAULT)){
-                            resp = "당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString();
+                        if(command[0].equals(typeController.LINEAGE_HELPER)){
 
+                            if(command.length == 1){
+                                resp = "명령어 목록 : 도움말, 사다리" + "\n" + "명령어 도움말 ex) /도움말#사다리";
+                            }else if(command[1].equals("도움말")){
+                                resp = "명령어 구조 : /도움말#대상명령어" + "\n" +
+                                        "ex) /도움말#사다리";
+                            }else if(command[1].equals("사다리")){
+                                resp = "명령어 구조 : /사다리#당첨자수#대상1,대상2,대상3,..." + "\n" +
+                                        "ex) 3명 대상으로 사다리 : /사다리#3#대상1,대상2,대상3,...";
+                            }
+                        }else if(command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)){
+                            resp = "당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString();
                         }
 
                         message.reply(resp);

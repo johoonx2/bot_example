@@ -3,8 +3,9 @@ package com.discord.bot.util;
 public class typeController {
 
     // for Lineage
-    public final static String SADARI_DEFAULT = "/사다리";
-    public final static String SADARI_MODE2 = "/사다리2";
+    public final static String LINEAGE_HELPER= "/도움말";
+    public final static String LINEAGE_SADARI_DEFAULT = "/사다리";
+    public final static String LINEAGE_SADARI_MODE2 = "/사다리2";
 //    public final static String JOIN_RATING = "/참여율";
 //    public final static String
 
