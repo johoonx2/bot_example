@@ -94,21 +94,21 @@ public class mainController {
                                 message.reply(resp);
 
                             } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
-                                System.out.println("> SADARI");
-                                int delayTimeSec = 1;
-                                delayTimeSec *= 1000;
-                                Robot robot = new Robot();
-
-                                robot.delay(delayTimeSec);
-                                message.reply("3");
-
-                                robot.delay(delayTimeSec);
-                                message.reply("2");
-
-                                robot.delay(delayTimeSec);
-                                message.reply("1");
-
-                                robot.delay(delayTimeSec);
+//                                System.out.println("> SADARI");
+//                                int delayTimeSec = 1;
+//                                delayTimeSec *= 1000;
+//                                Robot robot = new Robot();
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("3");
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("2");
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("1");
+//
+//                                robot.delay(delayTimeSec);
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
