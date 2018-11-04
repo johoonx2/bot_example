@@ -92,41 +92,41 @@ public class mainController {
                                 }
                             } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
                                 System.out.println("> SADARI");
-                                int delayTimeSec = 1;
-                                delayTimeSec *= 1000;
-                                Robot robot = new Robot();
-
-                                robot.delay(delayTimeSec);
-                                message.reply("3");
-
-                                robot.delay(delayTimeSec);
-                                message.reply("2");
-
-                                robot.delay(delayTimeSec);
-                                message.reply("1");
-
-                                robot.delay(delayTimeSec);
-                                message.reply("가즈아~");
-
-                                robot.delay(delayTimeSec);
+//                                int delayTimeSec = 1;
+//                                delayTimeSec *= 1000;
+//                                Robot robot = new Robot();
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("3");
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("2");
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("1");
+//
+//                                robot.delay(delayTimeSec);
+//                                message.reply("가즈아~");
+//
+//                                robot.delay(delayTimeSec);
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
                                 System.out.println("> DRAKE CUT");
                                 if (command[1].equals("컷")) {
-                                    int delayTimeSec = 10;
-                                    delayTimeSec *= 1000;
-                                    Robot robot = new Robot();
-                                    robot.delay(delayTimeSec);
-                                    message.reply("드레컷 후 10초");
-
-                                    delayTimeSec *= 6;
-                                    robot.delay(delayTimeSec);
-                                    message.reply("드레컷 후 1분");
-
-                                    delayTimeSec *= 60;
-                                    robot.delay(delayTimeSec);
-                                    message.reply("드레컷 후 60분");
+//                                    int delayTimeSec = 10;
+//                                    delayTimeSec *= 1000;
+//                                    Robot robot = new Robot();
+//                                    robot.delay(delayTimeSec);
+//                                    message.reply("드레컷 후 10초");
+//
+//                                    delayTimeSec *= 6;
+//                                    robot.delay(delayTimeSec);
+//                                    message.reply("드레컷 후 1분");
+//
+//                                    delayTimeSec *= 60;
+//                                    robot.delay(delayTimeSec);
+//                                    message.reply("드레컷 후 60분");
                                 }
                             }
 
