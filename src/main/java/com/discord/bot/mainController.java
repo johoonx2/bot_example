@@ -67,11 +67,14 @@ public class mainController {
 
                             String resp = "";
                             String cmd = message.getContent();
+                            System.out.println("> Command : " + cmd);
+
+
                             cmd = cmd.replace(" ", "");
                             String[] command = cmd.split("#");
 
                             if (command[0].equals(typeController.LINEAGE_HELPER)) {
-
+                                System.out.println("> LINEAGE HELPER");
                                 if (command.length == 1) {
                                     resp = "명령어 목록 : 도움말, 사다리, 드레" + "\n" + "명령어 도움말 ex) /도움말#사다리";
                                 } else if (command[1].equals("도움말")) {
@@ -88,6 +91,7 @@ public class mainController {
                                             "시간 설정 : /드레#셋#12:40";
                                 }
                             } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
+                                System.out.println("> SADARI");
                                 int delayTimeSec = 1;
                                 delayTimeSec *= 1000;
                                 Robot robot = new Robot();
@@ -108,6 +112,7 @@ public class mainController {
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
+                                System.out.println("> DRAKE CUT");
                                 if (command[1].equals("컷")) {
                                     int delayTimeSec = 10;
                                     delayTimeSec *= 1000;
@@ -128,7 +133,7 @@ public class mainController {
 
 
                         } catch (Exception e) {
-
+                            System.out.println("> EXCEPTION : " +  e);
                         }
                     }
 
