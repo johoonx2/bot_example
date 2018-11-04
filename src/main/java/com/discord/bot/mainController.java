@@ -9,8 +9,10 @@ import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
 
 // for MySQL
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Handler;
 
 
 // for Bot
@@ -19,19 +21,42 @@ import com.discord.bot.util.*;
 
 public class mainController {
 
-    static public void main(String args[]){
-        lineageDispatcher();
+    static public void main(String args[]) throws Exception{
+//        lineageDispatcher();
+//        localTest();
     }
 
 
+    public static void localTest() throws Exception{
+//        String cmd = "/드레#컷";
+//        cmd = cmd.replace(" ", "");
+//        String[] command = cmd.split("#");
+//
+//        if(command[0].equals(typeController.LINEAGE_BOSS_DRAKE)){
+//            if(command[1].equals("컷")){
+//
+//                System.out.println("TimerTest");
+//                int delayTimeSec = 10;
+//                delayTimeSec*=1000;
+//                Robot robot = new Robot();
+//                robot.delay(delayTimeSec);
+//                System.out.println("TimerTest-End");
+//
+//            }
+//        }
+
+    }
+
+
+
     // Lineage Manager
-    public static void lineageDispatcher(){
+    public static void lineageDispatcher() throws Exception{
         DiscordAPI api = Javacord.getApi("NTA0MjI4ODM4NjU0NjA3Mzcx.DrG2Aw.7FUV_2YF4JJo8imPTLAkO9azhUw", true);
         api.connect(new FutureCallback<DiscordAPI>() {
             public void onSuccess(final DiscordAPI api) {
                 api.registerListener(new MessageCreateListener() {
                     public void onMessageCreate(DiscordAPI api, Message message) {
-
+                        try {
 //                        Default Type
 //                        if(message.getContent().equals("ping")){
 //                            message.reply("pong!");
@@ -40,28 +65,73 @@ public class mainController {
 
 //                        String cmd = "/사다리#2#캐스팅,대선한잔,다마,해롱,노빠꾸";
 
-                        String resp = "";
-                        String cmd = message.getContent();
-                        cmd = cmd.replace(" ", "");
-                        String[] command = cmd.split("#");
+                            String resp = "";
+                            String cmd = message.getContent();
+                            cmd = cmd.replace(" ", "");
+                            String[] command = cmd.split("#");
 
-                        if(command[0].equals(typeController.LINEAGE_HELPER)){
+                            if (command[0].equals(typeController.LINEAGE_HELPER)) {
 
-                            if(command.length == 1){
-                                resp = "명령어 목록 : 도움말, 사다리" + "\n" + "명령어 도움말 ex) /도움말#사다리";
-                            }else if(command[1].equals("도움말")){
-                                resp = "명령어 구조 : /도움말#대상명령어" + "\n" +
-                                        "ex) /도움말#사다리";
-                            }else if(command[1].equals("사다리")){
-                                resp = "명령어 구조 : /사다리#당첨자수#대상1,대상2,대상3,..." + "\n" +
-                                        "ex) 3명 대상으로 사다리 : /사다리#3#대상1,대상2,대상3,...";
+                                if (command.length == 1) {
+                                    resp = "명령어 목록 : 도움말, 사다리, 드레" + "\n" + "명령어 도움말 ex) /도움말#사다리";
+                                } else if (command[1].equals("도움말")) {
+                                    resp = "명령어 구조 : /도움말#대상명령어" + "\n" +
+                                            "ex) /도움말#사다리";
+                                } else if (command[1].equals("사다리")) {
+                                    resp = "명령어 구조 : /사다리#당첨자수#대상1,대상2,대상3,..." + "\n" +
+                                            "ex) 3명 대상으로 사다리 : /사다리#3#대상1,대상2,대상3,...";
+                                } else if (command[1].equals("드레")) {
+                                    resp = "명령어 구조 : /드레#명령어" + "\n" +
+                                            "명령어 예제" + "\n" +
+                                            "등록 : /드레#컷" + "\n" +
+                                            "삭제 : /드레#삭" + "\n" +
+                                            "시간 설정 : /드레#셋#12:40";
+                                }
+                            } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
+                                int delayTimeSec = 1;
+                                delayTimeSec *= 1000;
+                                Robot robot = new Robot();
+
+                                robot.delay(delayTimeSec);
+                                message.reply("3");
+
+                                robot.delay(delayTimeSec);
+                                message.reply("2");
+
+                                robot.delay(delayTimeSec);
+                                message.reply("1");
+
+                                robot.delay(delayTimeSec);
+                                message.reply("가즈아~");
+
+                                robot.delay(delayTimeSec);
+                                message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
+
+                            } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
+                                if (command[1].equals("컷")) {
+                                    int delayTimeSec = 10;
+                                    delayTimeSec *= 1000;
+                                    Robot robot = new Robot();
+                                    robot.delay(delayTimeSec);
+                                    message.reply("드레컷 후 10초");
+
+                                    delayTimeSec *= 6;
+                                    robot.delay(delayTimeSec);
+                                    message.reply("드레컷 후 1분");
+
+                                    delayTimeSec *= 60;
+                                    robot.delay(delayTimeSec);
+                                    message.reply("드레컷 후 60분");
+                                }
                             }
-                        }else if(command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)){
-                            resp = "당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString();
-                        }
 
-                        message.reply(resp);
+
+
+                        } catch (Exception e) {
+
+                        }
                     }
+
                 });
             }
 
