@@ -56,11 +56,11 @@ public class mainController {
             public void onSuccess(final DiscordAPI api) {
                 api.registerListener(new MessageCreateListener() {
                     public void onMessageCreate(DiscordAPI api, Message message) {
-//                        try {
+                        try {
 //                        Default Type
-//                        if(message.getContent().equals("ping")){
-//                            message.reply("pong!");
-//                        }
+                        if(message.getContent().equals("ping")){
+                            message.reply("pong!");
+                        }
 
 
 //                        String cmd = "/사다리#2#캐스팅,대선한잔,다마,해롱,노빠꾸";
@@ -90,51 +90,51 @@ public class mainController {
                                             "삭제 : /드레#삭" + "\n" +
                                             "시간 설정 : /드레#셋#12:40";
                                 }
+
+                                message.reply(resp);
+
                             } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
                                 System.out.println("> SADARI");
-//                                int delayTimeSec = 1;
-//                                delayTimeSec *= 1000;
-//                                Robot robot = new Robot();
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("3");
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("2");
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("1");
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("가즈아~");
-//
-//                                robot.delay(delayTimeSec);
+                                int delayTimeSec = 1;
+                                delayTimeSec *= 1000;
+                                Robot robot = new Robot();
+
+                                robot.delay(delayTimeSec);
+                                message.reply("3");
+
+                                robot.delay(delayTimeSec);
+                                message.reply("2");
+
+                                robot.delay(delayTimeSec);
+                                message.reply("1");
+
+                                robot.delay(delayTimeSec);
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
                                 System.out.println("> DRAKE CUT");
                                 if (command[1].equals("컷")) {
-//                                    int delayTimeSec = 10;
-//                                    delayTimeSec *= 1000;
-//                                    Robot robot = new Robot();
-//                                    robot.delay(delayTimeSec);
-//                                    message.reply("드레컷 후 10초");
-//
-//                                    delayTimeSec *= 6;
-//                                    robot.delay(delayTimeSec);
-//                                    message.reply("드레컷 후 1분");
-//
-//                                    delayTimeSec *= 60;
-//                                    robot.delay(delayTimeSec);
-//                                    message.reply("드레컷 후 60분");
+                                    int delayTimeSec = 10;
+                                    delayTimeSec *= 1000;
+                                    Robot robot = new Robot();
+                                    robot.delay(delayTimeSec);
+                                    message.reply("드레컷 후 10초");
+
+                                    delayTimeSec *= 6;
+                                    robot.delay(delayTimeSec);
+                                    message.reply("드레컷 후 1분");
+
+                                    delayTimeSec *= 60;
+                                    robot.delay(delayTimeSec);
+                                    message.reply("드레컷 후 60분");
                                 }
                             }
 
 
 
-//                        } catch (Exception e) {
-//                            System.out.println("> EXCEPTION : " +  e);
-//                        }
+                        } catch (Exception e) {
+                            System.out.println("> EXCEPTION : " +  e);
+                        }
                     }
 
                 });
