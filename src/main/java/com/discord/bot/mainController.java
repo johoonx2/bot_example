@@ -21,7 +21,7 @@ import com.discord.bot.util.*;
 
 public class mainController {
 
-    static public void main(String args[]) throws Exception{
+    static public void main(String args[]){
         lineageDispatcher();
 //        localTest();
     }
@@ -50,13 +50,13 @@ public class mainController {
 
 
     // Lineage Manager
-    public static void lineageDispatcher() throws Exception{
+    public static void lineageDispatcher(){
         DiscordAPI api = Javacord.getApi("NTA0MjI4ODM4NjU0NjA3Mzcx.DrG2Aw.7FUV_2YF4JJo8imPTLAkO9azhUw", true);
         api.connect(new FutureCallback<DiscordAPI>() {
             public void onSuccess(final DiscordAPI api) {
                 api.registerListener(new MessageCreateListener() {
                     public void onMessageCreate(DiscordAPI api, Message message) {
-                        try {
+//                        try {
 //                        Default Type
 //                        if(message.getContent().equals("ping")){
 //                            message.reply("pong!");
@@ -132,9 +132,9 @@ public class mainController {
 
 
 
-                        } catch (Exception e) {
-                            System.out.println("> EXCEPTION : " +  e);
-                        }
+//                        } catch (Exception e) {
+//                            System.out.println("> EXCEPTION : " +  e);
+//                        }
                     }
 
                 });
