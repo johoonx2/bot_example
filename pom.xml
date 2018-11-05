@@ -15,11 +15,6 @@
         </repository>
     </repositories>
 
-    <properties>
-        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>de.btobastian.javacord</groupId>

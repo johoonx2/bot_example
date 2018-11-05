@@ -12,6 +12,8 @@ import de.btobastian.javacord.listener.message.MessageCreateListener;
 import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Handler;
 
 
@@ -19,15 +21,107 @@ import java.util.logging.Handler;
 import com.discord.bot.util.*;
 
 
+// for Timmer
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+// for Time
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class mainController {
 
     static public void main(String args[]){
         lineageDispatcher();
 //        localTest();
+
+//        bossTimer();
+    }
+
+    public static int tCounter = 0;
+
+    public static void bossTimer(String who, Message message){
+        final Message response = message;
+        final String bossName = who;
+        final  Timer bossTimer = new Timer();
+        TimerTask bossTask = new TimerTask() {
+            @Override
+            public void run() {
+
+//                Date today = new Date();
+//                SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
+
+                int rTime = 3600 - tCounter;
+                if(tCounter < 3600){
+
+                    if(rTime  % 60 == 0){
+                        if(rTime  % 10 == 0){
+//                            System.out.println(rTime / 60 + "분 전 : " + time.format(today));
+                            System.out.println(bossName + " " + rTime / 60 + "분 전");
+                            response.reply(bossName + " " + rTime / 60 + "분 전");
+                        }else if(rTime  < 6){
+//                            System.out.println(rTime / 60 + "분 전 : " + time.format(today));
+                            System.out.println(bossName + " " + rTime / 60 + "분 전");
+                            response.reply(bossName + " " + rTime / 60 + "분 전");
+                        }
+
+                    }
+
+                    if(rTime < 30){
+                        if(rTime  % 10 == 0){
+//                            System.out.println(rTime  + "초 전" + time.format(today));
+                            System.out.println(bossName + " " + rTime  + "초 전");
+                            response.reply(bossName + " " + rTime  + "초 전");
+                        }else if(rTime  < 6){
+//                            System.out.println(rTime + "초 전" + time.format(today));
+                            System.out.println(bossName + " " + rTime  + "초 전");
+                            response.reply(bossName + " " + rTime  + "초 전");
+                        }
+
+                    }
+
+                    tCounter++;
+                }else{
+                    bossTimer.cancel();
+                }
+            }
+        };
+        bossTimer.schedule(bossTask, 0, 1000);
     }
 
 
-    public static void localTest() throws Exception{
+    public static void localTest(){
+
+        Date today = new Date();
+        System.out.println(today);
+
+//        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
+
+//        System.out.println("Date: "+date.format(today));
+        System.out.println("Time: "+time.format(today));
+
+
+        Runnable runnable = new Runnable() {
+            public void run() {
+                Date today = new Date();
+//                System.out.println(today);
+
+//                SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
+                SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
+
+                System.out.println("Time: "+time.format(today));
+            }
+        };
+
+        System.out.println("Time: "+time.format(today));
+
+        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+        service.scheduleWithFixedDelay(runnable, 0, 1, TimeUnit.SECONDS);
+
+        service.shutdown();
+
 //        String cmd = "/드레#컷";
 //        cmd = cmd.replace(" ", "");
 //        String[] command = cmd.split("#");
@@ -114,20 +208,23 @@ public class mainController {
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
                                 System.out.println("> DRAKE CUT");
                                 if (command[1].equals("컷")) {
-                                    int delayTimeSec = 10;
-                                    delayTimeSec *= 1000;
-                                    Robot robot = new Robot();
-                                    robot.delay(delayTimeSec);
-                                    message.reply("드레컷 후 10초");
-
-                                    delayTimeSec *= 6;
-                                    robot.delay(delayTimeSec);
-                                    message.reply("드레컷 후 1분");
-
-                                    delayTimeSec *= 60;
-                                    robot.delay(delayTimeSec);
-                                    message.reply("드레컷 후 60분");
+                                    bossTimer("드레이크", message);
+//                                    int delayTimeSec = 10;
+//                                    delayTimeSec *= 1000;
+//                                    Robot robot = new Robot();
+//                                    robot.delay(delayTimeSec);
+//                                    message.reply("드레컷 후 10초");
+//
+//                                    delayTimeSec *= 6;
+//                                    robot.delay(delayTimeSec);
+//                                    message.reply("드레컷 후 1분");
+//
+//                                    delayTimeSec *= 60;
+//                                    robot.delay(delayTimeSec);
+//                                    message.reply("드레컷 후 60분");
                                 }
+
+
                             }
 
 
