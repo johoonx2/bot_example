@@ -30,114 +30,25 @@ import java.util.concurrent.TimeUnit;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.discord.bot.util.cmdController.bossTimer;
+import static com.discord.bot.util.cmdController.timerManager;
+
 public class mainController {
 
+    final static boolean DEV_MODE = true;
+
     static public void main(String args[]){
-        lineageDispatcher();
+//        lineageDispatcher();
 //        localTest();
 
-//        bossTimer();
+        bossTimer("드레이크", null, 0);
+        bossTimer("카스파", null, 6);
+        bossTimer("이프리트", null, 7);
     }
 
-    public static int tCounter = 0;
-
-    public static void bossTimer(String who, Message message){
-        final Message response = message;
-        final String bossName = who;
-        final  Timer bossTimer = new Timer();
-        TimerTask bossTask = new TimerTask() {
-            @Override
-            public void run() {
-
-//                Date today = new Date();
-//                SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
-
-                int rTime = 3600 - tCounter;
-                if(tCounter < 3600){
-
-                    if(rTime  % 60 == 0){
-                        if(rTime  % 10 == 0){
-//                            System.out.println(rTime / 60 + "분 전 : " + time.format(today));
-                            System.out.println(bossName + " " + rTime / 60 + "분 전");
-                            response.reply(bossName + " " + rTime / 60 + "분 전");
-                        }else if(rTime  < 6){
-//                            System.out.println(rTime / 60 + "분 전 : " + time.format(today));
-                            System.out.println(bossName + " " + rTime / 60 + "분 전");
-                            response.reply(bossName + " " + rTime / 60 + "분 전");
-                        }
-
-                    }
-
-                    if(rTime < 30){
-                        if(rTime  % 10 == 0){
-//                            System.out.println(rTime  + "초 전" + time.format(today));
-                            System.out.println(bossName + " " + rTime  + "초 전");
-                            response.reply(bossName + " " + rTime  + "초 전");
-                        }else if(rTime  < 6){
-//                            System.out.println(rTime + "초 전" + time.format(today));
-                            System.out.println(bossName + " " + rTime  + "초 전");
-                            response.reply(bossName + " " + rTime  + "초 전");
-                        }
-
-                    }
-
-                    tCounter++;
-                }else{
-                    bossTimer.cancel();
-                }
-            }
-        };
-        bossTimer.schedule(bossTask, 0, 1000);
-    }
 
 
     public static void localTest(){
-
-        Date today = new Date();
-        System.out.println(today);
-
-//        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
-        SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
-
-//        System.out.println("Date: "+date.format(today));
-        System.out.println("Time: "+time.format(today));
-
-
-        Runnable runnable = new Runnable() {
-            public void run() {
-                Date today = new Date();
-//                System.out.println(today);
-
-//                SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd");
-                SimpleDateFormat time = new SimpleDateFormat("hh:mm:ss a");
-
-                System.out.println("Time: "+time.format(today));
-            }
-        };
-
-        System.out.println("Time: "+time.format(today));
-
-        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-        service.scheduleWithFixedDelay(runnable, 0, 1, TimeUnit.SECONDS);
-
-        service.shutdown();
-
-//        String cmd = "/드레#컷";
-//        cmd = cmd.replace(" ", "");
-//        String[] command = cmd.split("#");
-//
-//        if(command[0].equals(typeController.LINEAGE_BOSS_DRAKE)){
-//            if(command[1].equals("컷")){
-//
-//                System.out.println("TimerTest");
-//                int delayTimeSec = 10;
-//                delayTimeSec*=1000;
-//                Robot robot = new Robot();
-//                robot.delay(delayTimeSec);
-//                System.out.println("TimerTest-End");
-//
-//            }
-//        }
 
     }
 
@@ -151,13 +62,9 @@ public class mainController {
                 api.registerListener(new MessageCreateListener() {
                     public void onMessageCreate(DiscordAPI api, Message message) {
                         try {
-//                        Default Type
-                        if(message.getContent().equals("ping")){
-                            message.reply("pong!");
-                        }
-
-
-//                        String cmd = "/사다리#2#캐스팅,대선한잔,다마,해롱,노빠꾸";
+                            if(message.getContent().equals("ping")){
+                                message.reply("pong!");
+                            }
 
                             String resp = "";
                             String cmd = message.getContent();
@@ -188,49 +95,29 @@ public class mainController {
                                 message.reply(resp);
 
                             } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
-//                                System.out.println("> SADARI");
-//                                int delayTimeSec = 1;
-//                                delayTimeSec *= 1000;
-//                                Robot robot = new Robot();
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("3");
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("2");
-//
-//                                robot.delay(delayTimeSec);
-//                                message.reply("1");
-//
-//                                robot.delay(delayTimeSec);
+
+                                System.out.println("> SADARI");
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
+
                                 System.out.println("> DRAKE CUT");
+
                                 if (command[1].equals("컷")) {
-                                    bossTimer("드레이크", message);
-//                                    int delayTimeSec = 10;
-//                                    delayTimeSec *= 1000;
-//                                    Robot robot = new Robot();
-//                                    robot.delay(delayTimeSec);
-//                                    message.reply("드레컷 후 10초");
-//
-//                                    delayTimeSec *= 6;
-//                                    robot.delay(delayTimeSec);
-//                                    message.reply("드레컷 후 1분");
-//
-//                                    delayTimeSec *= 60;
-//                                    robot.delay(delayTimeSec);
-//                                    message.reply("드레컷 후 60분");
+                                    message.reply("> 드레이크 타이머 설정 완료");
+                                    timerManager[typeController.LINEAGE_BOSS_ID_DRAKE] = bossTimer("드레이크", message, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_ID_DRAKE].cancel();
+                                    message.reply("> 드레이크 타이머 제거 완료");
                                 }
-
-
                             }
 
 
 
                         } catch (Exception e) {
                             System.out.println("> EXCEPTION : " +  e);
+                            message.reply("> 에러 발생! " +  e);
                         }
                     }
 

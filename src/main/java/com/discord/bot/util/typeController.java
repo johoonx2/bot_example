@@ -8,6 +8,11 @@ public class typeController {
     public final static String LINEAGE_SADARI_MODE2 = "/사다리2";
     public final static String LINEAGE_BOSS_DRAKE = "/드레";
 
+    public final static int LINEAGE_BOSS_ID_DRAKE = 0;
+    public final static int LINEAGE_BOSS_ID_CASPA = 1;
+    public final static int LINEAGE_BOSS_ID_IFRIT = 2;
+
+
 //    public final static String JOIN_RATING = "/참여율";
 //    public final static String
 
