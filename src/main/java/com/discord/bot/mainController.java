@@ -11,9 +11,10 @@ import de.btobastian.javacord.listener.message.MessageCreateListener;
 // for MySQL
 import java.awt.*;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.*;
+import java.util.Date;
 import java.util.logging.Handler;
 
 
@@ -28,7 +29,6 @@ import java.util.concurrent.TimeUnit;
 
 // for Time
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static com.discord.bot.util.cmdController.bossTimer;
 import static com.discord.bot.util.cmdController.timerManager;
@@ -38,8 +38,8 @@ public class mainController {
     final static boolean DEV_MODE = true;
 
     static public void main(String args[]){
-        lineageDispatcher();
-//        localTest();
+//        lineageDispatcher();
+        localTest();
 
 //        bossTimer("드레이크", null, 0);
 //        bossTimer("카스파", null, 6);
@@ -49,7 +49,13 @@ public class mainController {
 
 
     public static void localTest(){
-
+//        Calendar cal = Calendar.getInstance();
+//        System.out.println("h : " + cal.get(Calendar.HOUR));
+//        System.out.println("m : " + cal.get(Calendar.MINUTE));
+//
+//        cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + 50);
+//
+//        System.out.println("시 : " + cal.get(Calendar.HOUR) + " 분 :: " + cal.get(Calendar.MINUTE));
     }
 
 
@@ -77,19 +83,19 @@ public class mainController {
                             if (command[0].equals(typeController.LINEAGE_HELPER)) {
                                 System.out.println("> LINEAGE HELPER");
                                 if (command.length == 1) {
-                                    resp = "명령어 목록 : 도움말, 사다리, 드레" + "\n" + "명령어 도움말 ex) /도움말#사다리";
+                                    resp = "명령어 목록 : 도움말, 사다리, 서드" + "\n" + "명령어 도움말 ex) /도움말#사다리";
                                 } else if (command[1].equals("도움말")) {
                                     resp = "명령어 구조 : /도움말#대상명령어" + "\n" +
                                             "ex) /도움말#사다리";
                                 } else if (command[1].equals("사다리")) {
                                     resp = "명령어 구조 : /사다리#당첨자수#대상1,대상2,대상3,..." + "\n" +
                                             "ex) 3명 대상으로 사다리 : /사다리#3#대상1,대상2,대상3,...";
-                                } else if (command[1].equals("드레")) {
-                                    resp = "명령어 구조 : /드레#명령어" + "\n" +
+                                } else if (command[1].equals("서드")) {
+                                    resp = "명령어 구조 : /서드#명령어" + "\n" +
                                             "명령어 예제" + "\n" +
-                                            "등록 : /드레#컷" + "\n" +
-                                            "삭제 : /드레#삭" + "\n" +
-                                            "시간 설정 : /드레#셋#12:40";
+                                            "등록 : /서드#컷" + "\n" +
+                                            "삭제 : /서드#삭" + "\n" +
+                                            "시간 설정 : /서드#셋#12:40";
                                 }
 
                                 message.reply(resp);
@@ -99,19 +105,22 @@ public class mainController {
                                 System.out.println("> SADARI");
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
-                            } else if (command[0].equals(typeController.LINEAGE_BOSS_DRAKE)) {
+                            } else if (command[0].equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)) {
 
-                                System.out.println("> DRAKE CUT");
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME);
 
                                 if (command[1].equals("컷")) {
-                                    message.reply("> 드레이크 타이머 설정 완료");
-                                    timerManager[typeController.LINEAGE_BOSS_ID_DRAKE] = bossTimer("드레이크", message, 0);
+                                    message.reply("> 드레이크(북) 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
+                                    timerManager[typeController.LINEAGE_BOSS_NORTH_DRAKE_ID] = bossTimer(typeController.LINEAGE_BOSS_NORTH_DRAKE, message, 0);
 
                                 }else if(command[1].equals("삭")){
-                                    timerManager[typeController.LINEAGE_BOSS_ID_DRAKE].cancel();
-                                    message.reply("> 드레이크 타이머 제거 완료");
+                                    timerManager[typeController.LINEAGE_BOSS_NORTH_DRAKE_ID].cancel();
+                                    message.reply("> 드레이크(북) 타이머 제거 완료");
                                 }
                             }
+
+
 
 
 
@@ -123,6 +132,7 @@ public class mainController {
 
                 });
             }
+
 
             public void onFailure(Throwable t) {
                 t.printStackTrace();

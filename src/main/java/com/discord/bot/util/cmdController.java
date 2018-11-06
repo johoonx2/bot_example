@@ -27,21 +27,23 @@ public class cmdController {
     public static Timer bossTimer(String who, Message message, int Delay){
         final Message response = message;
         final String bossName = who;
-        final  Timer bossTimer = new Timer();
+        final Timer bossTime = new Timer();
+        final int adjustTime = Delay;
         TimerTask bossTask = new TimerTask() {
             @Override
             public void run() {
                 int bossID = 0;
-                if(bossName.equals("드레이크")){
-                    bossID = typeController.LINEAGE_BOSS_ID_DRAKE;
-                }else if(bossName.equals("카스파")){
-                    bossID = typeController.LINEAGE_BOSS_ID_CASPA;
-                }else if(bossName.equals("이프리트")){
-                    bossID = typeController.LINEAGE_BOSS_ID_IFRIT;
+                int bossInterval = 0;
+                if(bossName.equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)){
+                    bossID = typeController.LINEAGE_BOSS_NORTH_DRAKE_ID;
+                    bossInterval = typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME;
                 }
 
-                int rTime = 3600 - bossTimeCounter[bossID];
-                if(bossTimeCounter[bossID] < 3600){
+                // 시간 조정
+                bossInterval += adjustTime;
+
+                int rTime = bossInterval - bossTimeCounter[bossID];
+                if(bossTimeCounter[bossID] < typeController.TIME_30_MIN){ // 30분 전부터 수행
 
                     if(rTime  % 60 == 0){
 
@@ -79,13 +81,13 @@ public class cmdController {
                     }
                     bossTimeCounter[bossID]++;
                 }else{
-                    bossTimer.cancel();
+                    bossTime.cancel();
                 }
             }
         };
-        bossTimer.schedule(bossTask, Delay, 100);
+        bossTime.schedule(bossTask, Delay, 100);
 
-        return bossTimer;
+        return bossTime;
     }
 
 //    public static int getWinner(int area){
