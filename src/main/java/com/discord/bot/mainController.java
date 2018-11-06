@@ -102,11 +102,11 @@ public class mainController {
 
                             } else if (command[0].equals(typeController.LINEAGE_SADARI_DEFAULT)) {
 
-                                System.out.println("> SADARI");
+                                System.out.println("> 사다리");
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)) {
-
+                                System.out.println("> 북드");
                                 Calendar cal = Calendar.getInstance();
                                 cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME);
 
