@@ -38,12 +38,12 @@ public class mainController {
     final static boolean DEV_MODE = true;
 
     static public void main(String args[]){
-//        lineageDispatcher();
+        lineageDispatcher();
 //        localTest();
 
-        bossTimer("드레이크", null, 0);
-        bossTimer("카스파", null, 6);
-        bossTimer("이프리트", null, 7);
+//        bossTimer("드레이크", null, 0);
+//        bossTimer("카스파", null, 6);
+//        bossTimer("이프리트", null, 7);
     }
 
 
