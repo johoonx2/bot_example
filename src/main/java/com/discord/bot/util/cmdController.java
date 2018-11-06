@@ -24,23 +24,19 @@ public class cmdController {
     public static Timer[] timerManager = new Timer[20];
 
 
-    public static Timer bossTimer(String who, Message message, int Delay){
+    public static Timer bossTimer(String who, Message message, int bossId, int bossInterval, int delay){
         final Message response = message;
         final String bossName = who;
         final Timer bossTime = new Timer();
-        final int adjustTime = Delay;
         TimerTask bossTask = new TimerTask() {
             @Override
             public void run() {
                 int bossID = 0;
                 int bossInterval = 0;
-                if(bossName.equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)){
-                    bossID = typeController.LINEAGE_BOSS_NORTH_DRAKE_ID;
-                    bossInterval = typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME;
-                }
-
-                // 시간 조정
-                bossInterval += adjustTime;
+//                if(bossName.equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)){
+//                    bossID = typeController.LINEAGE_BOSS_NORTH_DRAKE_ID;
+//                    bossInterval = typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME;
+//                }
 
                 int rTime = bossInterval - bossTimeCounter[bossID];
                 if(bossTimeCounter[bossID] < typeController.TIME_30_MIN){ // 30분 전부터 수행
@@ -85,7 +81,7 @@ public class cmdController {
                 }
             }
         };
-        bossTime.schedule(bossTask, Delay, 100);
+        bossTime.schedule(bossTask, delay, 100);
 
         return bossTime;
     }

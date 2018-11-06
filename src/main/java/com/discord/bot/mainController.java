@@ -90,12 +90,13 @@ public class mainController {
                                 } else if (command[1].equals("사다리")) {
                                     resp = "명령어 구조 : /사다리#당첨자수#대상1,대상2,대상3,..." + "\n" +
                                             "ex) 3명 대상으로 사다리 : /사다리#3#대상1,대상2,대상3,...";
-                                } else if (command[1].equals("서드")) {
-                                    resp = "명령어 구조 : /서드#명령어" + "\n" +
+                                } else if (command[1].equals("보스")) {
+                                    resp = "명령어 구조 : /보스#명령어" + "\n" +
                                             "명령어 예제" + "\n" +
-                                            "등록 : /서드#컷" + "\n" +
-                                            "삭제 : /서드#삭" + "\n" +
-                                            "시간 설정 : /서드#셋#12:40";
+                                            "등록 : /보스#컷 - 예) /서드#컷" + "\n" +
+                                            "삭제 : /보스#삭 - 예) /서드#삭" + "\n" +
+                                            "지원보스 : 동드, 서드, 북드, 중드, 자크, 카스파, 아르";
+//                                            "시간 설정 : /서드#셋#12:40";
                                 }
 
                                 message.reply(resp);
@@ -106,17 +107,102 @@ public class mainController {
                                 message.reply("당첨자 : " + cmdController.sadari(1, command[1], command[2]).toString());
 
                             } else if (command[0].equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)) {
-                                System.out.println("> 북드");
+                                // 북드
                                 Calendar cal = Calendar.getInstance();
                                 cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME);
 
                                 if (command[1].equals("컷")) {
-                                    message.reply("> 드레이크(북) 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
-                                    timerManager[typeController.LINEAGE_BOSS_NORTH_DRAKE_ID] = bossTimer(typeController.LINEAGE_BOSS_NORTH_DRAKE, message, 0);
+                                    message.reply("> 드레이크(북) 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_NORTH_DRAKE_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_NORTH_DRAKE, message, typeController.LINEAGE_BOSS_NORTH_DRAKE_ID, typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME, 0);
 
                                 }else if(command[1].equals("삭")){
                                     timerManager[typeController.LINEAGE_BOSS_NORTH_DRAKE_ID].cancel();
                                     message.reply("> 드레이크(북) 타이머 제거 완료");
+                                }
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_MIDDLE_DRAKE)) {
+                                // 중드
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_MIDDLE_DRAKE_TIME);
+
+                                if (command[1].equals("컷")) {
+                                    message.reply("> 드레이크(중) 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_MIDDLE_DRAKE_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_MIDDLE_DRAKE, message, typeController.LINEAGE_BOSS_MIDDLE_DRAKE_ID, typeController.LINEAGE_BOSS_MIDDLE_DRAKE_TIME, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_MIDDLE_DRAKE_ID].cancel();
+                                    message.reply("> 드레이크(중) 타이머 제거 완료");
+                                }
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_EAST_DRAKE)) {
+                                // 동드
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_EAST_DRAKE_TIME);
+
+                                if (command[1].equals("컷")) {
+                                    message.reply("> 드레이크(동) 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_EAST_DRAKE_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_EAST_DRAKE, message, typeController.LINEAGE_BOSS_EAST_DRAKE_ID, typeController.LINEAGE_BOSS_EAST_DRAKE_TIME, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_EAST_DRAKE_ID].cancel();
+                                    message.reply("> 드레이크(동) 타이머 제거 완료");
+                                }
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_WEST_DRAKE)) {
+                                // 서드
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_WEST_DRAKE_TIME);
+
+                                if (command[1].equals("컷")) {
+                                    message.reply("> 드레이크(서) 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_WEST_DRAKE_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_WEST_DRAKE, message, typeController.LINEAGE_BOSS_WEST_DRAKE_ID, typeController.LINEAGE_BOSS_WEST_DRAKE_TIME, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_WEST_DRAKE_ID].cancel();
+                                    message.reply("> 드레이크(서) 타이머 제거 완료");
+                                }
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_GIANTCROCODILE)) {
+                                // 자이언트 크로커다일
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_GIANTCROCODILE_TIME);
+
+                                if (command[1].equals("컷")) {
+                                    message.reply("> 자이언트 크로커다일 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_GIANTCROCODILE_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_GIANTCROCODILE, message, typeController.LINEAGE_BOSS_GIANTCROCODILE_ID, typeController.LINEAGE_BOSS_GIANTCROCODILE_TIME, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_GIANTCROCODILE_ID].cancel();
+                                    message.reply("> 자이언트 크로커다일 타이머 제거 완료");
+                                }
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_CASPA)) {
+                                // 카스파
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_CASPA_TIME);
+
+                                if (command[1].equals("컷")) {
+                                    message.reply("> 카스파 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_CASPA_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_CASPA, message, typeController.LINEAGE_BOSS_CASPA_ID, typeController.LINEAGE_BOSS_CASPA_TIME, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_CASPA_ID].cancel();
+                                    message.reply("> 카스파 타이머 제거 완료");
+                                }
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_ARPIER)) {
+                                // 아르피어
+                                Calendar cal = Calendar.getInstance();
+                                cal.set(Calendar.SECOND, cal.get(Calendar.SECOND) + typeController.LINEAGE_BOSS_ARPIER_TIME);
+
+                                if (command[1].equals("컷")) {
+                                    message.reply("> 아르피어 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                                    timerManager[typeController.LINEAGE_BOSS_ARPIER_ID]
+                                            = bossTimer(typeController.LINEAGE_BOSS_ARPIER, message, typeController.LINEAGE_BOSS_ARPIER_ID, typeController.LINEAGE_BOSS_ARPIER_TIME, 0);
+
+                                }else if(command[1].equals("삭")){
+                                    timerManager[typeController.LINEAGE_BOSS_ARPIER_ID].cancel();
+                                    message.reply("> 아르피어 타이머 제거 완료");
                                 }
                             }
 
