@@ -1,8 +1,8 @@
 package com.discord.bot.util;
 
+import com.discord.bot.model.BossInfo;
 import de.btobastian.javacord.entities.message.Message;
 
-import javax.swing.*;
 import java.util.*;
 import java.util.Timer;
 
@@ -20,31 +20,30 @@ public class cmdController {
     }
 
 
+    // 보스타임 관리
+    public static List<BossInfo> bossInfo = new ArrayList<BossInfo>();
+    public static void initValues(){
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_NORTH_DRAKE, typeController.LINEAGE_BOSS_NORTH_DRAKE_ID,typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_MIDDLE_DRAKE, typeController.LINEAGE_BOSS_MIDDLE_DRAKE_ID,typeController.LINEAGE_BOSS_MIDDLE_DRAKE_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_EAST_DRAKE, typeController.LINEAGE_BOSS_EAST_DRAKE_ID,typeController.LINEAGE_BOSS_EAST_DRAKE_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_WEST_DRAKE, typeController.LINEAGE_BOSS_WEST_DRAKE_ID,typeController.LINEAGE_BOSS_WEST_DRAKE_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_CASPA, typeController.LINEAGE_BOSS_CASPA_ID,typeController.LINEAGE_BOSS_CASPA_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_GIANTCROCODILE, typeController.LINEAGE_BOSS_GIANTCROCODILE_ID,typeController.LINEAGE_BOSS_GIANTCROCODILE_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_ARPIER, typeController.LINEAGE_BOSS_ARPIER_ID,typeController.LINEAGE_BOSS_ARPIER_TIME,0,false));
+    }
 
-    // 보스타이머
-    public static int[] bossTimeCounter = new int[20];
-    public static Timer[] timerManager = new Timer[20];
-    public static boolean[] timerManagerStatus = new boolean[20];
-    public static String[] timerManagerBoss = new String[20];
-    public static int[] timerManagerRestTime = new int[20];
 
-
-//    public static void initValues(){
-//        Arrays.fill(bossTimeCounter, 0);
-//        Arrays.fill(timerManagerStatus, false);
-//        Arrays.fill(timerManagerBoss, "");
-//        Arrays.fill(timerManagerRestTime, 0);
-//    }
-
+    // 활성화된 보탐 조회
     public static List<String> activatedBoss(){
 
         List<String> bossList = new ArrayList<String>();
 
         int index = 0;
         boolean isExist = false;
-        for (boolean isActivated : timerManagerStatus) {
-            if(isActivated){
-                bossList.add(timerManagerBoss[index] + " : " + (timerManagerRestTime[index] / 60) + " Min");
+        for (BossInfo boss: bossInfo) {
+
+            if(boss.isActivated()){
+                bossList.add(boss.getBossName() + " : " + (boss.getBossRestTime() / 60) + " Min");
                 isExist = true;
             }
             index ++;
@@ -56,21 +55,22 @@ public class cmdController {
         return bossList;
     }
 
-    public static Timer bossTimer(String who, Message message, int whoID, int whoInterval, int delayMin){
+    // 보탐 활성화
+    public static Timer bossTimer(int boss, Message message, int delayMin){
         final Message response = message;
-        final Timer bossTime = new Timer();
 
 //        if(DEV_MODE){
 //            whoInterval = 250;
 //            delayMin = -1;
 //        }
 
-        final String bossName = who;
-        final int bossID = whoID;
-        final int bossInterval = whoInterval + (delayMin * 60);
-        timerManager[bossID] = bossTime;
-        timerManagerStatus[bossID] = true;
-        timerManagerBoss[bossID] = bossName.replace("/", "");
+        final int bossID = boss;
+
+        final String bossName = bossInfo.get(bossID).getBossName();
+        final int bossInterval = bossInfo.get(bossID).getBossInterval() + (delayMin * 60);
+        bossInfo.get(bossID).setBossTimer(new Timer());
+        bossInfo.get(bossID).setActivated(true);
+        bossInfo.get(bossID).setBossRestTime(bossInterval);
 
         if(DEV_MODE){
             System.out.println("Debug > " + bossName + " / ID " + bossID + " / TimeInterval " + bossInterval);
@@ -79,43 +79,36 @@ public class cmdController {
         TimerTask bossTask = new TimerTask() {
             @Override
             public void run() {
-                timerManagerRestTime[bossID] = bossInterval - bossTimeCounter[bossID];
-                bossTimeCounter[bossID]++;
-
-
+                bossInfo.get(bossID).increaseSec();
+                int restTime = bossInfo.get(bossID).getBossRestTime();
                 if(DEV_MODE){
-                        System.out.println("Debug > " + bossName + " : " + timerManagerRestTime[bossID] + "초 전");
+                    System.out.println("Debug > " + bossName + " : " + restTime + "초 전");
 
-                    if (timerManagerRestTime[bossID] == typeController.TIME_3_MIN) {
+                    if (restTime == typeController.TIME_3_MIN) {
                         System.out.println(bossName + " 3분 전");
-                    } else if (timerManagerRestTime[bossID] == typeController.TIME_1_MIN) {
+                    } else if (restTime == typeController.TIME_1_MIN) {
                         System.out.println(bossName + " 1분 전");
-                    } else if (timerManagerRestTime[bossID] <= 1) {
-                        bossTime.cancel();
-                        timerManagerStatus[bossID] = false;
+                    } else if (restTime <= 1) {
+                        bossInfo.get(bossID).getBossTimer().cancel();
+                        bossInfo.get(bossID).setActivated(false);
                     }
 
                 }else {
-                    System.out.println("Debug > " + bossName + " : " + timerManagerRestTime[bossID] + "초 전");
+                    System.out.println("Debug > " + bossName + " : " + restTime + "초 전");
 
-                    if (timerManagerRestTime[bossID] == typeController.TIME_3_MIN) {
+                    if (restTime == typeController.TIME_3_MIN) {
                         response.reply(bossName + " 3분 전");
-                    } else if (timerManagerRestTime[bossID] == typeController.TIME_1_MIN) {
+                    } else if (restTime == typeController.TIME_1_MIN) {
                         response.reply(bossName + " 1분 전");
-                    } else if (timerManagerRestTime[bossID] <= 1) {
-                        bossTime.cancel();
-                        timerManagerStatus[bossID] = false;
+                    } else if (restTime <= 1) {
+                        bossInfo.get(bossID).getBossTimer().cancel();
+                        bossInfo.get(bossID).setActivated(false);
                     }
                 }
             }
         };
-        bossTime.schedule(bossTask, 0, 1000);
+        bossInfo.get(bossID).getBossTimer().schedule(bossTask, 0, 1000);
 
-        return bossTime;
+        return bossInfo.get(bossID).getBossTimer();
     }
-
-//    public static int getWinner(int area){
-//        Random rand = new Random();
-//        return rand.nextInt(area);
-//    }
 }

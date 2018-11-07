@@ -16,19 +16,19 @@ public class typeController {
     public final static int TIME_3_MIN = 180;
     public final static int TIME_1_MIN = 60;
 
-    public final static String LINEAGE_HELPER= "/도움말";
-    public final static String LINEAGE_SADARI_DEFAULT = "/사다리";
-    public final static String LINEAGE_SADARI_MODE2 = "/사다리2";
+    public final static String LINEAGE_HELPER= "도움말";
+    public final static String LINEAGE_SADARI_DEFAULT = "사다리";
+    public final static String LINEAGE_SADARI_MODE2 = "사다리2";
 
-    public final static String LINEAGE_BOSS_LIST = "/보스리스트";         // 북드
+    public final static String LINEAGE_BOSS_LIST = "보스리스트";         // 북드
 
-    public final static String LINEAGE_BOSS_NORTH_DRAKE = "/북드";         // 북드
-    public final static String LINEAGE_BOSS_MIDDLE_DRAKE= "/중드";         // 중드
-    public final static String LINEAGE_BOSS_EAST_DRAKE = "/동드";          // 동드
-    public final static String LINEAGE_BOSS_WEST_DRAKE = "/서드";          // 서드
-    public final static String LINEAGE_BOSS_CASPA = "/카스파";             // 카스파
-    public final static String LINEAGE_BOSS_GIANTCROCODILE = "/자크";      // 자크
-    public final static String LINEAGE_BOSS_ARPIER = "/아르";              // 아르피어
+    public final static String LINEAGE_BOSS_NORTH_DRAKE = "북드";         // 북드
+    public final static String LINEAGE_BOSS_MIDDLE_DRAKE= "중드";         // 중드
+    public final static String LINEAGE_BOSS_EAST_DRAKE = "동드";          // 동드
+    public final static String LINEAGE_BOSS_WEST_DRAKE = "서드";          // 서드
+    public final static String LINEAGE_BOSS_CASPA = "카스파";             // 카스파
+    public final static String LINEAGE_BOSS_GIANTCROCODILE = "자크";      // 자크
+    public final static String LINEAGE_BOSS_ARPIER = "아르";              // 아르피어
 
     public final static int LINEAGE_BOSS_NORTH_DRAKE_ID = 0;        // 북드
     public final static int LINEAGE_BOSS_MIDDLE_DRAKE_ID= 1;        // 중드
