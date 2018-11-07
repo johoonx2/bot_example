@@ -31,15 +31,14 @@ import java.util.concurrent.TimeUnit;
 // for Time
 import java.text.SimpleDateFormat;
 
-import static com.discord.bot.util.cmdController.activatedBoss;
-import static com.discord.bot.util.cmdController.bossTimer;
-import static com.discord.bot.util.cmdController.timerManager;
+import static com.discord.bot.util.cmdController.*;
 
 public class mainController {
 
     final static boolean DEV_MODE = true;
 
     static public void main(String args[]){
+        initValues();
         lineageDispatcher();
     }
 
