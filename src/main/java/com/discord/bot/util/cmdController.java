@@ -28,6 +28,14 @@ public class cmdController {
     public static String[] timerManagerBoss = new String[20];
     public static int[] timerManagerRestTime = new int[20];
 
+
+    public static void initValues(){
+        Arrays.fill(bossTimeCounter, 0);
+        Arrays.fill(timerManagerStatus, false);
+        Arrays.fill(timerManagerBoss, "");
+        Arrays.fill(timerManagerRestTime, 0);
+    }
+
     public static List<String> activatedBoss(){
 
         List<String> bossList = new ArrayList<String>();
