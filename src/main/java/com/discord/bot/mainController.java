@@ -35,7 +35,7 @@ import static com.discord.bot.util.cmdController.*;
 
 public class mainController {
 
-    final static boolean DEV_MODE = true;
+    final static boolean DEV_MODE = false;
 
     static public void main(String args[]){
         initValues();
