@@ -13,10 +13,14 @@ public class typeController {
     // for Lineage
     public final static int TIME_1_HOUR = 3600;
     public final static int TIME_30_MIN = 1800;
+    public final static int TIME_3_MIN = 180;
+    public final static int TIME_1_MIN = 60;
 
     public final static String LINEAGE_HELPER= "/도움말";
     public final static String LINEAGE_SADARI_DEFAULT = "/사다리";
     public final static String LINEAGE_SADARI_MODE2 = "/사다리2";
+
+    public final static String LINEAGE_BOSS_LIST = "/보스리스트";         // 북드
 
     public final static String LINEAGE_BOSS_NORTH_DRAKE = "/북드";         // 북드
     public final static String LINEAGE_BOSS_MIDDLE_DRAKE= "/중드";         // 중드

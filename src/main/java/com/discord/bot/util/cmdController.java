@@ -2,7 +2,9 @@ package com.discord.bot.util;
 
 import de.btobastian.javacord.entities.message.Message;
 
+import javax.swing.*;
 import java.util.*;
+import java.util.Timer;
 
 public class cmdController {
 
@@ -22,66 +24,84 @@ public class cmdController {
     // 보스타이머
     public static int[] bossTimeCounter = new int[20];
     public static Timer[] timerManager = new Timer[20];
+    public static boolean[] timerManagerStatus = new boolean[20];
+    public static String[] timerManagerBoss = new String[20];
+    public static int[] timerManagerRestTime = new int[20];
 
+    public static List<String> activatedBoss(){
 
-    public static Timer bossTimer(String who, Message message, int bossId, int bossInterval, int delay){
+        List<String> bossList = new ArrayList<String>();
+
+        int index = 0;
+        boolean isExist = false;
+        for (boolean isActivated : timerManagerStatus) {
+            if(isActivated){
+                bossList.add(timerManagerBoss[index] + " : " + (timerManagerRestTime[index] / 60) + " Min");
+                isExist = true;
+            }
+            index ++;
+        }
+
+        if(!isExist){
+            bossList.add("등록된 정보가 없습니다.");
+        }
+        return bossList;
+    }
+
+    public static Timer bossTimer(String who, Message message, int whoID, int whoInterval, int delayMin){
         final Message response = message;
-        final String bossName = who;
         final Timer bossTime = new Timer();
+
+//        if(DEV_MODE){
+//            whoInterval = 250;
+//            delayMin = -1;
+//        }
+
+        final String bossName = who;
+        final int bossID = whoID;
+        final int bossInterval = whoInterval + (delayMin * 60);
+        timerManager[bossID] = bossTime;
+        timerManagerStatus[bossID] = true;
+        timerManagerBoss[bossID] = bossName.replace("/", "");
+
+        if(DEV_MODE){
+            System.out.println("Debug > " + bossName + " / ID " + bossID + " / TimeInterval " + bossInterval);
+        }
+
         TimerTask bossTask = new TimerTask() {
             @Override
             public void run() {
-                int bossID = 0;
-                int bossInterval = 0;
-//                if(bossName.equals(typeController.LINEAGE_BOSS_NORTH_DRAKE)){
-//                    bossID = typeController.LINEAGE_BOSS_NORTH_DRAKE_ID;
-//                    bossInterval = typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME;
-//                }
+                timerManagerRestTime[bossID] = bossInterval - bossTimeCounter[bossID];
+                bossTimeCounter[bossID]++;
 
-                int rTime = bossInterval - bossTimeCounter[bossID];
-                if(bossTimeCounter[bossID] < typeController.TIME_30_MIN){ // 30분 전부터 수행
 
-                    if(rTime  % 60 == 0){
+                if(DEV_MODE){
+                        System.out.println("Debug > " + bossName + " : " + timerManagerRestTime[bossID] + "초 전");
 
-                        // 10분 단위
-                        if(rTime  % 600 == 0){
-                            System.out.println(bossName + " " + rTime / 60 + "분 전");
-                            if(!DEV_MODE)
-                                response.reply(bossName + " " + rTime / 60 + "분 전");
-
-                            // 10분 이내
-                        }else if(rTime  < 600){
-                            System.out.println(bossName + " " + rTime / 60 + "분 전");
-                            if(!DEV_MODE)
-                                response.reply(bossName + " " + rTime / 60 + "분 전");
-                        }
-
+                    if (timerManagerRestTime[bossID] == typeController.TIME_3_MIN) {
+                        System.out.println(bossName + " 3분 전");
+                    } else if (timerManagerRestTime[bossID] == typeController.TIME_1_MIN) {
+                        System.out.println(bossName + " 1분 전");
+                    } else if (timerManagerRestTime[bossID] <= 1) {
+                        bossTime.cancel();
+                        timerManagerStatus[bossID] = false;
                     }
 
-                    // 30초 이내
-                    if(rTime < 30){
+                }else {
+                    System.out.println("Debug > " + bossName + " : " + timerManagerRestTime[bossID] + "초 전");
 
-                        // 20, 10초
-                        if(rTime  % 10 == 0){
-                            System.out.println(bossName + " " + rTime  + "초 전");
-                            if(!DEV_MODE)
-                                response.reply(bossName + " " + rTime  + "초 전");
-
-                            // 5초 이내
-                        }else if(rTime  < 6){
-                            System.out.println(bossName + " " + rTime  + "초 전");
-                            if(!DEV_MODE)
-                                response.reply(bossName + " " + rTime  + "초 전");
-                        }
-
+                    if (timerManagerRestTime[bossID] == typeController.TIME_3_MIN) {
+                        response.reply(bossName + " 3분 전");
+                    } else if (timerManagerRestTime[bossID] == typeController.TIME_1_MIN) {
+                        response.reply(bossName + " 1분 전");
+                    } else if (timerManagerRestTime[bossID] <= 1) {
+                        bossTime.cancel();
+                        timerManagerStatus[bossID] = false;
                     }
-                    bossTimeCounter[bossID]++;
-                }else{
-                    bossTime.cancel();
                 }
             }
         };
-        bossTime.schedule(bossTask, delay, 100);
+        bossTime.schedule(bossTask, 0, 1000);
 
         return bossTime;
     }
