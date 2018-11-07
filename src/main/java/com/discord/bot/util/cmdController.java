@@ -9,7 +9,7 @@ import java.util.Timer;
 public class cmdController {
 
 
-    final static boolean DEV_MODE = true;
+    final static boolean DEV_MODE = false;
 
 
     // 사다리타기
@@ -29,12 +29,12 @@ public class cmdController {
     public static int[] timerManagerRestTime = new int[20];
 
 
-    public static void initValues(){
-        Arrays.fill(bossTimeCounter, 0);
-        Arrays.fill(timerManagerStatus, false);
-        Arrays.fill(timerManagerBoss, "");
-        Arrays.fill(timerManagerRestTime, 0);
-    }
+//    public static void initValues(){
+//        Arrays.fill(bossTimeCounter, 0);
+//        Arrays.fill(timerManagerStatus, false);
+//        Arrays.fill(timerManagerBoss, "");
+//        Arrays.fill(timerManagerRestTime, 0);
+//    }
 
     public static List<String> activatedBoss(){
 

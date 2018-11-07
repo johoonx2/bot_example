@@ -31,15 +31,33 @@ import java.util.concurrent.TimeUnit;
 // for Time
 import java.text.SimpleDateFormat;
 
-import static com.discord.bot.util.cmdController.*;
+import static com.discord.bot.util.cmdController.activatedBoss;
+import static com.discord.bot.util.cmdController.bossTimer;
+import static com.discord.bot.util.cmdController.timerManager;
 
 public class mainController {
 
-    final static boolean DEV_MODE = false;
-
     static public void main(String args[]){
-        initValues();
         lineageDispatcher();
+
+//        List<String> bossList = activatedBoss();
+//        for (String boss : bossList) {
+//            System.out.println("1st : " + boss);
+//        }
+//
+//        bossTimer(typeController.LINEAGE_BOSS_NORTH_DRAKE, null, typeController.LINEAGE_BOSS_NORTH_DRAKE_ID, typeController.LINEAGE_BOSS_NORTH_DRAKE_TIME,0);
+//
+//        List<String> bossList2 = activatedBoss();
+//        for (String boss : bossList2) {
+//            System.out.println("2nd : " + boss);
+//        }
+//
+//        bossTimer(typeController.LINEAGE_BOSS_ARPIER, null, typeController.LINEAGE_BOSS_ARPIER_ID, typeController.LINEAGE_BOSS_ARPIER_TIME,0);
+//
+//        List<String> bossList3 = activatedBoss();
+//        for (String boss : bossList3) {
+//            System.out.println("3rd : " + boss);
+//        }
     }
 
 
