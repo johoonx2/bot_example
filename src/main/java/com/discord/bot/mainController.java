@@ -181,7 +181,7 @@ public class mainController {
 
 
                 Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + bossTime);
+//                cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + bossTime);
 
                 if (command[1].equals("컷")) {
                     message.reply("> " + bossName + " 타이머 설정 완료 (" + cal.get(Calendar.AM_PM) + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
