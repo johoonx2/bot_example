@@ -5,7 +5,9 @@ import com.discord.bot.util.typeController;
 import com.google.common.util.concurrent.FutureCallback;
 import de.btobastian.javacord.DiscordAPI;
 import de.btobastian.javacord.Javacord;
+import de.btobastian.javacord.entities.VoiceChannel;
 import de.btobastian.javacord.entities.message.Message;
+import de.btobastian.javacord.entities.message.MessageReceiver;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
 
 // for MySQL
@@ -21,9 +23,15 @@ import java.util.logging.Handler;
 
 // for Bot
 import com.discord.bot.util.*;
+import net.dv8tion.jda.core.AccountType;
+import net.dv8tion.jda.core.JDABuilder;
+import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.core.exceptions.RateLimitedException;
+import net.dv8tion.jda.core.hooks.ListenerAdapter;
 
 
 // for Timmer
+import javax.security.auth.login.LoginException;
 import javax.xml.ws.Response;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -36,12 +44,22 @@ import static com.discord.bot.util.cmdController.*;
 
 public class mainController {
 
-    static public void main(String args[]){
-        initValues();
-        lineageDispatcher();
+    static public void main(String args[]) throws LoginException, RateLimitedException{
+//        initValues();
+//        lineageDispatcher();
 //        localTest();
+        jdaRun();
     }
 
+
+    public static void jdaRun() throws LoginException, RateLimitedException{
+        new JDABuilder(AccountType.BOT).setToken("NTA0MjI4ODM4NjU0NjA3Mzcx.DrG2Aw.7FUV_2YF4JJo8imPTLAkO9azhUw").buildAsync();
+    }
+
+//    @Override
+    public void onMessageReceived(MessageReceiver event){
+        System.out.println("TEST");
+    }
 
 
     public static void localTest(){
@@ -95,26 +113,27 @@ public class mainController {
 //                            # getChannel
 //                            if(message.getContent().equals("getChannel")){
 //                                message.reply(">" + api.getChannels().toString());
-//                                Response :
 //                                >[general (id: 504566390624092166), 사다리추첨방 (id: 508442656737853443), 보탐-인원확인방 (id: 508136002762833921), 하이혈맹-운영비 (id: 508136044290506753), 자유채팅방 (id: 453165102141669389), 보탐-제작재료 (id: 508136025684443136), 보탐시간체크 (id: 508139161610485764), 보탐-다야정산방 (id: 508136014645166092), 척살인원명단 (id: 508136034962505749), 하이-공지사항 (id: 508139364023271435)]
 //                            }
 
 //                            # getVoiceChannels
-                            if(message.getContent().equals("getVoiceChannels")){
-                                message.reply(">" + api.getVoiceChannels().toString());
-                            }
+//                            if(message.getContent().equals("getVoiceChannels")){
+//                                message.reply(">" + api.getVoiceChannels().toString());
+//                                >[일반 (id: 504566390624092170), 하이혈맹디코방 (id: 453165102141669391), 하이간부회의방 (id: 508139474279071744), 잠수방 (id: 508338215674183681)]
+//                            }
 
 
 //                            # getVoiceChannelById
-//                            if(message.getContent().equals("getVoiceChannelById_getConnectedUsers")){
-//                                message.reply(">" + api.getVoiceChannelById(api.getVoiceChannelById("하이혈맹디코방").getConnectedUsers().toString()));
-//                            }
+                            if(message.getContent().equals("getVoiceChannelById_getConnectedUsers")){
+                                message.reply(">" + api.getVoiceChannelById("453165102141669391").getConnectedUsers().toString());
+                            }
 //
 //                            if(message.getContent().equals("getVoiceChannelById_getConnectedUsers")){
-//                                message.reply(">" + api.getVoiceChannelById(api.getVoiceChannelById("하이혈맹디코방").getConnectedUsers().toString()));
+//                                message.reply(">" + api.getVoiceChannelById("453165102141669391").getConnectedUsers().toString());
 //                            }
 
-
+                            VoiceChannel vChannel = api.getVoiceChannelById("453165102141669391");
+//                            AudioManager audioManager =
 
 
                             String resp = "";
