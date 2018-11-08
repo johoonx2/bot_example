@@ -87,6 +87,10 @@ public class mainController {
                                 message.reply("pong!");
                             }
 
+                            if(message.getContent().equals("getChannel")){
+                                message.reply(">" + api.getChannels().toString());
+                            }
+
                             String resp = "";
                             String cmd = message.getContent();
                             System.out.println("> Command : " + cmd);

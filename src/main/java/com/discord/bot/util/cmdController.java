@@ -97,9 +97,9 @@ public class cmdController {
                     System.out.println("Debug > " + bossName + " : " + restTime + "초 전");
 
                     if (restTime == typeController.TIME_3_MIN) {
-                        response.reply("/tts 알림 " + bossName + " 3분 전입니다.");
+                        response.reply("> [알림] " + bossName + " 3분 전");
                     } else if (restTime == typeController.TIME_1_MIN) {
-                        response.reply("/tts 알림 " + bossName + " 1분 전입니다.");
+                        response.reply("> [알림] " + bossName + " 1분 전");
                     } else if (restTime <= 1) {
                         bossInfo.get(bossID).getBossTimer().cancel();
                         bossInfo.get(bossID).setActivated(false);
