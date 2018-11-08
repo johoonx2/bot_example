@@ -24,6 +24,7 @@ import com.discord.bot.util.*;
 
 
 // for Timmer
+import javax.xml.ws.Response;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -83,13 +84,38 @@ public class mainController {
                 api.registerListener(new MessageCreateListener() {
                     public void onMessageCreate(DiscordAPI api, Message message) {
                         try {
-                            if(message.getContent().equals("ping")){
-                                message.reply("pong!");
+
+
+                            /* 예제 모음 */
+//                            # Default
+//                            if(message.getContent().equals("ping")){
+//                                message.reply("pong!");
+//                            }
+
+//                            # getChannel
+//                            if(message.getContent().equals("getChannel")){
+//                                message.reply(">" + api.getChannels().toString());
+//                                Response :
+//                                >[general (id: 504566390624092166), 사다리추첨방 (id: 508442656737853443), 보탐-인원확인방 (id: 508136002762833921), 하이혈맹-운영비 (id: 508136044290506753), 자유채팅방 (id: 453165102141669389), 보탐-제작재료 (id: 508136025684443136), 보탐시간체크 (id: 508139161610485764), 보탐-다야정산방 (id: 508136014645166092), 척살인원명단 (id: 508136034962505749), 하이-공지사항 (id: 508139364023271435)]
+//                            }
+
+//                            # getVoiceChannels
+                            if(message.getContent().equals("getVoiceChannels")){
+                                message.reply(">" + api.getVoiceChannels().toString());
                             }
 
-                            if(message.getContent().equals("getChannel")){
-                                message.reply(">" + api.getChannels().toString());
-                            }
+
+//                            # getVoiceChannelById
+//                            if(message.getContent().equals("getVoiceChannelById_getConnectedUsers")){
+//                                message.reply(">" + api.getVoiceChannelById(api.getVoiceChannelById("하이혈맹디코방").getConnectedUsers().toString()));
+//                            }
+//
+//                            if(message.getContent().equals("getVoiceChannelById_getConnectedUsers")){
+//                                message.reply(">" + api.getVoiceChannelById(api.getVoiceChannelById("하이혈맹디코방").getConnectedUsers().toString()));
+//                            }
+
+
+
 
                             String resp = "";
                             String cmd = message.getContent();
