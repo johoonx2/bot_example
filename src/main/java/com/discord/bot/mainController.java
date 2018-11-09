@@ -23,12 +23,6 @@ import java.util.logging.Handler;
 
 // for Bot
 import com.discord.bot.util.*;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.exceptions.RateLimitedException;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
-
 
 // for Timmer
 import javax.security.auth.login.LoginException;
@@ -44,23 +38,11 @@ import static com.discord.bot.util.cmdController.*;
 
 public class mainController {
 
-    static public void main(String args[]) throws LoginException, RateLimitedException{
-//        initValues();
-//        lineageDispatcher();
+    static public void main(String args[]){
+        initValues();
+        lineageDispatcher(args[0]);
 //        localTest();
-        jdaRun();
     }
-
-
-    public static void jdaRun() throws LoginException, RateLimitedException{
-        new JDABuilder(AccountType.BOT).setToken("NTA0MjI4ODM4NjU0NjA3Mzcx.DrG2Aw.7FUV_2YF4JJo8imPTLAkO9azhUw").buildAsync();
-    }
-
-//    @Override
-    public void onMessageReceived(MessageReceiver event){
-        System.out.println("TEST");
-    }
-
 
     public static void localTest(){
 //        Calendar cal = Calendar.getInstance();
@@ -95,8 +77,8 @@ public class mainController {
 
 
     // Lineage Manager
-    public static void lineageDispatcher(){
-        DiscordAPI api = Javacord.getApi("NTA0MjI4ODM4NjU0NjA3Mzcx.DrG2Aw.7FUV_2YF4JJo8imPTLAkO9azhUw", true);
+    public static void lineageDispatcher(String token){
+        DiscordAPI api = Javacord.getApi(token, true);
         api.connect(new FutureCallback<DiscordAPI>() {
             public void onSuccess(final DiscordAPI api) {
                 api.registerListener(new MessageCreateListener() {
