@@ -3,13 +3,15 @@ package com.discord.bot.util;
 import com.discord.bot.model.BossInfo;
 import de.btobastian.javacord.entities.message.Message;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Timer;
 
 public class cmdController {
 
 
-    final static boolean DEV_MODE = false;
+    final static boolean DEV_MODE = true;
 
 
     // 사다리타기
@@ -56,7 +58,7 @@ public class cmdController {
     }
 
     // 보탐 활성화
-    public static Timer bossTimer(int boss, Message message, int delayMin){
+    public static Timer bossTimer(int boss, Message message, String delayMin, boolean isSet) throws ParseException{
         final Message response = message;
 
 //        if(DEV_MODE){
@@ -65,12 +67,31 @@ public class cmdController {
 //        }
 
         final int bossID = boss;
-
         final String bossName = bossInfo.get(bossID).getBossName();
-        final int bossInterval = bossInfo.get(bossID).getBossInterval() + (delayMin * 60);
+
+        int interval = bossInfo.get(bossID).getBossInterval();
+
+        if(delayMin.length() > 0){
+            if(isSet){
+                // 직접 시간을 지정한 경우
+                SimpleDateFormat f = new SimpleDateFormat("HH:mm", Locale.KOREA);
+                Date setDate = f.parse(delayMin);
+                Date curDate = new Date();
+                curDate = f.parse(f.format(curDate));
+                interval += (int) (setDate.getTime() - curDate.getTime()) / 1000;
+
+            }else{
+                // 딜레이만 적용할 경우
+                interval += (Integer.parseInt(delayMin) * 60);
+            }
+        }
+
+        final int bossInterval = interval;
+
         bossInfo.get(bossID).setBossTimer(new Timer());
         bossInfo.get(bossID).setActivated(true);
         bossInfo.get(bossID).setBossRestTime(bossInterval);
+
 
         if(DEV_MODE){
             System.out.println("Debug > " + bossName + " / ID " + bossID + " / TimeInterval " + bossInterval);
@@ -81,25 +102,32 @@ public class cmdController {
             public void run() {
                 bossInfo.get(bossID).increaseSec();
                 int restTime = bossInfo.get(bossID).getBossRestTime();
+
+                Calendar cal = Calendar.getInstance();
+                cal.add(Calendar.SECOND, restTime);
+
                 if(DEV_MODE){
-                    System.out.println("Debug > " + bossName + " : " + restTime + "초 전");
+                    if(restTime % 10 == 0) {
+                        System.out.println("Debug > " + bossName + ":" + restTime + "초 전 # 기준시각 " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
+                    }
 
                     if (restTime == typeController.TIME_3_MIN) {
-                        System.out.println("> [알림] " + bossName + " 3분 전");
+                        System.out.println("> [알림] " + bossName + " 3분 전 # 기준시각 " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
                     } else if (restTime == typeController.TIME_1_MIN) {
-                        System.out.println("> [알림] " + bossName + " 1분 전");
+                        System.out.println("> [알림] " + bossName + " 1분 전 # 기준시각 " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
                     } else if (restTime <= 1) {
                         bossInfo.get(bossID).getBossTimer().cancel();
                         bossInfo.get(bossID).setActivated(false);
                     }
 
                 }else {
-                    System.out.println("Debug > " + bossName + " : " + restTime + "초 전");
-
+                    if(restTime % 10 == 0) {
+                        System.out.println("Debug > " + bossName + ":" + restTime + "초 전 # 기준시각 " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
+                    }
                     if (restTime == typeController.TIME_3_MIN) {
-                        response.reply("> [알림] " + bossName + " 3분 전");
+                        response.reply("> [알림] " + bossName + " 3분 전 # 기준시각 " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
                     } else if (restTime == typeController.TIME_1_MIN) {
-                        response.reply("> [알림] " + bossName + " 1분 전");
+                        response.reply("> [알림] " + bossName + " 1분 전 # 기준시각 " + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE));
                     } else if (restTime <= 1) {
                         bossInfo.get(bossID).getBossTimer().cancel();
                         bossInfo.get(bossID).setActivated(false);

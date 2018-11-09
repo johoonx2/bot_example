@@ -38,35 +38,40 @@ import static com.discord.bot.util.cmdController.*;
 
 public class mainController {
 
-    static public void main(String args[]){
+    static public void main(String args[]) throws ParseException{
         initValues();
         lineageDispatcher(args[0]);
 //        localTest();
+//        timeTest();
     }
 
-    public static void localTest(){
-//        Calendar cal = Calendar.getInstance();
-//        System.out.println("h : " + cal.get(Calendar.HOUR));
-//        System.out.println("m : " + cal.get(Calendar.MINUTE));
+    public static void timeTest() throws ParseException{
+//        SimpleDateFormat f = new SimpleDateFormat("HH:mm", Locale.KOREA);
+//        Date setDate = f.parse("19:00");
+//        Date curDate = new Date();
+//        curDate = f.parse(f.format(curDate));
 //
-//        cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + 50);
 //
-//        System.out.println("시 : " + cal.get(Calendar.HOUR) + " 분 :: " + cal.get(Calendar.MINUTE));
+//        System.out.println(setDate.getTime() / 1000);
+//        System.out.println(curDate.getTime() / 1000);
+//        System.out.println(((setDate.getTime() / 1000) - (curDate.getTime() / 1000)));
+    }
 
+    public static void localTest() throws ParseException{
 
         List<String> bossList = activatedBoss();
         for (String boss : bossList) {
             System.out.println("1st : " + boss);
         }
 
-        bossTimer(typeController.LINEAGE_BOSS_NORTH_DRAKE_ID, null,0);
+        bossTimer(typeController.LINEAGE_BOSS_NORTH_DRAKE_ID, null,"17:00", true);
 
         List<String> bossList2 = activatedBoss();
         for (String boss : bossList2) {
             System.out.println("2nd : " + boss);
         }
 
-        bossTimer(typeController.LINEAGE_BOSS_MIDDLE_DRAKE_ID, null,0);
+        bossTimer(typeController.LINEAGE_BOSS_MIDDLE_DRAKE_ID, null,"", false);
 
         List<String> bossList3 = activatedBoss();
         for (String boss : bossList3) {
@@ -190,7 +195,6 @@ public class mainController {
 
                             }else if (command[0].equals(typeController.LINEAGE_BOSS_ARPIER)) {
                                 bossDispatcher(command, typeController.LINEAGE_BOSS_ARPIER, typeController.LINEAGE_BOSS_ARPIER_ID, typeController.LINEAGE_BOSS_ARPIER_TIME, message);
-
                             }
 
                         } catch (Exception e) {
@@ -203,25 +207,27 @@ public class mainController {
                 });
             }
 
-            public void bossDispatcher(String[] command, String bossName, int bossID, int bossTime, Message message){
+            public void bossDispatcher(String[] command, String bossName, int bossID, int bossTime, Message message) throws ParseException {
 
-                int delay = 0;
+                String delay = "";
                 if(command.length > 2 && command[2] != null){
-                   delay = Integer.valueOf(command[2]);
+                   delay = command[2];
                 }
 
 
                 Calendar cal = Calendar.getInstance();
-//                cal.set(Calendar.MINUTE, cal.get(Calendar.MINUTE) + bossTime);
+                cal.add(Calendar.MINUTE, cal.get(Calendar.MINUTE) + bossTime);
 
                 if (command[1].equals("컷")) {
-                    message.reply("> " + bossName + " 타이머 설정 완료 (" + cal.get(Calendar.AM_PM) + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
-                    bossTimer(bossID, message, delay);
+                    message.reply("> " + bossName + " 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
+                    bossTimer(bossID, message, delay, false);
 
                 }else if(command[1].equals("삭")){
                     bossInfo.get(bossID).getBossTimer().cancel();
                     bossInfo.get(bossID).setActivated(false);
                     message.reply("> " + bossName + " 타이머 제거 완료");
+                }else if(command[1].equals("셋")){
+
                 }
             }
             public void onFailure(Throwable t) {

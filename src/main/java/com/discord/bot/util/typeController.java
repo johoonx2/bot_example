@@ -47,16 +47,9 @@ public class typeController {
     public final static int LINEAGE_BOSS_GIANTCROCODILE_TIME = TIME_1_HOUR * 3;     // 자크 3H
     public final static int LINEAGE_BOSS_ARPIER_TIME = TIME_1_HOUR * 4;             // 아르피어 4H
 
-//    public final static String JOIN_RATING = "/참여율";
-//    public final static String
 
-    // for Weight Manager
-    public final static String WEIGHT_ADD = "/wa";     // Weight Add [NAME] [WEIGHT], Response [BMI]
-    public final static String MEMBER_ADD = "/ma";     // Member Add [NAME] [HEIGHT], Response [Result]
-    public final static String WEIGHT_SEARCH = "/ws";  // Weight Search [NAME]
-    public final static String MEMBER_SEARCH = "/ms";  // Member Search [NAME]
-    public final static String WEIGHT_DELETE = "/wd";  // Weight Delete [CODE]
-    public final static String MEMBER_DELETE = "/md";  // Member Delete [NAME]
-    public final static String WEIGHT_LIST =  "/wl";   // Weight List - All
-    public final static String MEMBER_LIST =  "/ml";   // Member List - All
+    public final static String LINEAGE_HELPER_COMMAND_LIST = "보스 컷, 보스 삭, 보스 셋";
+    public final static String LINEAGE_HELPER_BOSS_CUT = "컷시간 기록 : [보스명] 컷 [조정시간 -10] \n*조정시간이 없을경우 생략. -10일 경우 10분 전으로 설정 ";
+    public final static String LINEAGE_HELPER_SADARI = "";
+    public final static String LINEAGE_HELPER_BOSS_SUPPORT = "드레이크(북드,중드,동드,서드), 카스파, 자이언트 크로커다일(자크), 아르피어(아르)";
 }
