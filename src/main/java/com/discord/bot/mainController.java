@@ -215,19 +215,20 @@ public class mainController {
                 }
 
 
-                Calendar cal = Calendar.getInstance();
-                cal.add(Calendar.MINUTE, cal.get(Calendar.MINUTE) + bossTime);
-
                 if (command[1].equals("컷")) {
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.MINUTE, cal.get(Calendar.MINUTE) + bossTime);
                     message.reply("> " + bossName + " 타이머 설정 완료 (" + cal.get(Calendar.HOUR) + ":" + cal.get(Calendar.MINUTE) + ")");
                     bossTimer(bossID, message, delay, false);
 
+                }else if(command[1].equals("셋")){
+                    message.reply("> " + bossName + " 타이머 설정 완료 (" +  command[2] + ")");
+                    bossTimer(bossID, message, command[2], true);
+                    
                 }else if(command[1].equals("삭")){
                     bossInfo.get(bossID).getBossTimer().cancel();
                     bossInfo.get(bossID).setActivated(false);
                     message.reply("> " + bossName + " 타이머 제거 완료");
-                }else if(command[1].equals("셋")){
-
                 }
             }
             public void onFailure(Throwable t) {
