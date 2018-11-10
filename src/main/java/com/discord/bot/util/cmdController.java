@@ -32,6 +32,22 @@ public class cmdController {
         bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_CASPA, typeController.LINEAGE_BOSS_CASPA_ID,typeController.LINEAGE_BOSS_CASPA_TIME,0,false));
         bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_GIANTCROCODILE, typeController.LINEAGE_BOSS_GIANTCROCODILE_ID,typeController.LINEAGE_BOSS_GIANTCROCODILE_TIME,0,false));
         bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_ARPIER, typeController.LINEAGE_BOSS_ARPIER_ID,typeController.LINEAGE_BOSS_ARPIER_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_PHOENIX, typeController.LINEAGE_BOSS_PHOENIX_ID,typeController.LINEAGE_BOSS_PHOENIX_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_IFRIT, typeController.LINEAGE_BOSS_IFRIT_ID,typeController.LINEAGE_BOSS_IFRIT_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_MAYO, typeController.LINEAGE_BOSS_MAYO_ID,typeController.LINEAGE_BOSS_MAYO_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_GIANTDRAKE, typeController.LINEAGE_BOSS_GIANTDRAKE_ID,typeController.LINEAGE_BOSS_GIANTDRAKE_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_ANCIENTGIANT, typeController.LINEAGE_BOSS_ANCIENTGIANT_ID,typeController.LINEAGE_BOSS_ANCIENTGIANT_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_GIANTWORM, typeController.LINEAGE_BOSS_GIANTWORM_ID,typeController.LINEAGE_BOSS_GIANTWORM_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_BANDIT, typeController.LINEAGE_BOSS_BANDIT_ID,typeController.LINEAGE_BOSS_BANDIT_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_GREENCHASKI, typeController.LINEAGE_BOSS_GREENCHASKI_ID,typeController.LINEAGE_BOSS_GREENCHASKI_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_REDCHASKI, typeController.LINEAGE_BOSS_REDCHASKI_ID,typeController.LINEAGE_BOSS_REDCHASKI_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_RICHARD, typeController.LINEAGE_BOSS_RICHARD_ID,typeController.LINEAGE_BOSS_RICHARD_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_DOPPELGANGER, typeController.LINEAGE_BOSS_DOPPELGANGER_ID,typeController.LINEAGE_BOSS_DOPPELGANGER_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_SPIRID, typeController.LINEAGE_BOSS_SPIRID_ID,typeController.LINEAGE_BOSS_SPIRID_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_GASTROD, typeController.LINEAGE_BOSS_GASTROD_ID,typeController.LINEAGE_BOSS_GASTROD_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_FAUST, typeController.LINEAGE_BOSS_FAUST_ID,typeController.LINEAGE_BOSS_FAUST_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_DEATHKNIGHT, typeController.LINEAGE_BOSS_DEATHKNIGHT_ID,typeController.LINEAGE_BOSS_DEATHKNIGHT_TIME,0,false));
+        bossInfo.add(new BossInfo(typeController.LINEAGE_BOSS_KURTZ, typeController.LINEAGE_BOSS_KURTZ_ID,typeController.LINEAGE_BOSS_KURTZ_TIME,0,false));
     }
 
 
