@@ -11,7 +11,7 @@ import java.util.Timer;
 public class cmdController {
 
 
-    final static boolean DEV_MODE = true;
+    final static boolean DEV_MODE = false;
 
 
     // 사다리타기
