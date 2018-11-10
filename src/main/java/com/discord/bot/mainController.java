@@ -35,6 +35,7 @@ import java.util.concurrent.TimeUnit;
 import java.text.SimpleDateFormat;
 
 import static com.discord.bot.util.cmdController.*;
+import static com.discord.bot.util.typeController.*;
 
 public class mainController {
 
@@ -135,26 +136,7 @@ public class mainController {
 
                             if (command[0].equals(typeController.LINEAGE_HELPER)) {
                                 System.out.println("> LINEAGE HELPER");
-//                                if (command.length == 1) {
-//                                    resp = "명령어 목록 : 도움말, 사다리, 서드 \n"
-//                                            + "명령어 도움말 ex) /도움말#사다리";
-//                                } else if (command[1].equals("도움말")) {
-//                                    resp = "명령어 구조 : /도움말#대상명령어 \n" +
-//                                            "ex) /도움말#사다리";
-//                                } else if (command[1].equals("사다리")) {
-//                                    resp = "명령어 구조 : /사다리#당첨자수#대상1,대상2,대상3,...\n" +
-//                                            "ex) 3명 대상으로 사다리 : /사다리#3#대상1,대상2,대상3,...";
-//                                } else if (command[1].equals("보스")) {
-//                                    resp = "명령어 구조 : /보스#명령어\n" +
-//                                            "명령어 예제\n" +
-//                                            "등록 : /보스#컷 - 예) /서드#컷\n" +
-//                                            "등록(조정) : /보스#컷#조정시간 - 예) /서드#컷#-5 (등록 기준 5분전 보스컷)\n" +
-//                                            "등록(지정시간) : /보스#셋#시간 - 예) /서드#컷#20:20 (20:20분 기준 보스컷 - 미지원)\n" +
-//                                            "삭제 : /보스#삭 - 예) /서드#삭\n" +
-//                                            "지원보스 : 동드, 서드, 북드, 중드, 자크, 카스파, 아르";
-////                                            "시간 설정 : /서드#셋#12:40";
-//                                }
-
+                                resp = LINEAGE_HELPER_BOSS + "\n" + LINEAGE_HELPER_BOSS_SUPPORT + "\n" + LINEAGE_HELPER_SADARI;
                                 message.reply(resp);
 
                             /* 사다리타기 */
@@ -195,6 +177,61 @@ public class mainController {
 
                             }else if (command[0].equals(typeController.LINEAGE_BOSS_ARPIER)) {
                                 bossDispatcher(command, typeController.LINEAGE_BOSS_ARPIER, typeController.LINEAGE_BOSS_ARPIER_ID, typeController.LINEAGE_BOSS_ARPIER_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_PHOENIX)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_PHOENIX, typeController.LINEAGE_BOSS_PHOENIX_ID, typeController.LINEAGE_BOSS_PHOENIX_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_IFRIT)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_IFRIT, typeController.LINEAGE_BOSS_IFRIT_ID, typeController.LINEAGE_BOSS_IFRIT_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_MAYO)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_MAYO, typeController.LINEAGE_BOSS_MAYO_ID, typeController.LINEAGE_BOSS_MAYO_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_GIANTDRAKE)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_GIANTDRAKE, typeController.LINEAGE_BOSS_GIANTDRAKE_ID, typeController.LINEAGE_BOSS_GIANTDRAKE_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_ANCIENTGIANT)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_ANCIENTGIANT, typeController.LINEAGE_BOSS_ANCIENTGIANT_ID, typeController.LINEAGE_BOSS_ANCIENTGIANT_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_GIANTWORM)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_GIANTWORM, typeController.LINEAGE_BOSS_GIANTWORM_ID, typeController.LINEAGE_BOSS_GIANTWORM_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_BANDIT)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_BANDIT, typeController.LINEAGE_BOSS_BANDIT_ID, typeController.LINEAGE_BOSS_BANDIT_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_GREENCHASKI)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_GREENCHASKI, typeController.LINEAGE_BOSS_GREENCHASKI_ID, typeController.LINEAGE_BOSS_GREENCHASKI_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_REDCHASKI)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_REDCHASKI, typeController.LINEAGE_BOSS_REDCHASKI_ID, typeController.LINEAGE_BOSS_REDCHASKI_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_RICHARD)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_RICHARD, typeController.LINEAGE_BOSS_RICHARD_ID, typeController.LINEAGE_BOSS_RICHARD_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_DOPPELGANGER)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_DOPPELGANGER, typeController.LINEAGE_BOSS_DOPPELGANGER_ID, typeController.LINEAGE_BOSS_DOPPELGANGER_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_SPIRID)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_SPIRID, typeController.LINEAGE_BOSS_SPIRID_ID, typeController.LINEAGE_BOSS_SPIRID_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_GASTROD)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_GASTROD, typeController.LINEAGE_BOSS_GASTROD_ID, typeController.LINEAGE_BOSS_GASTROD_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_FAUST)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_FAUST, typeController.LINEAGE_BOSS_FAUST_ID, typeController.LINEAGE_BOSS_FAUST_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_DEATHKNIGHT)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_DEATHKNIGHT, typeController.LINEAGE_BOSS_DEATHKNIGHT_ID, typeController.LINEAGE_BOSS_DEATHKNIGHT_TIME, message);
+
+                            }else if (command[0].equals(typeController.LINEAGE_BOSS_KURTZ)) {
+                                bossDispatcher(command, typeController.LINEAGE_BOSS_KURTZ, typeController.LINEAGE_BOSS_KURTZ_ID, typeController.LINEAGE_BOSS_KURTZ_TIME, message);
+
+//                            }else if (command[0].equals(typeController.LINEAGE_BOSS_NECROMANCER)) {
+//                                bossDispatcher(command, typeController.LINEAGE_BOSS_NECROMANCER, typeController.LINEAGE_BOSS_NECROMANCER_ID, typeController.LINEAGE_BOSS_NECROMANCER_TIME, message);
+//
+//                            }else if (command[0].equals(typeController.LINEAGE_BOSS_BAPHOMET)) {
+//                                bossDispatcher(command, typeController., typeController., typeController., message);
+
                             }
 
                         } catch (Exception e) {
@@ -224,11 +261,17 @@ public class mainController {
                 }else if(command[1].equals("셋")){
                     message.reply("> " + bossName + " 타이머 설정 완료 (" +  command[2] + ")");
                     bossTimer(bossID, message, command[2], true);
-                    
+
                 }else if(command[1].equals("삭")){
                     bossInfo.get(bossID).getBossTimer().cancel();
                     bossInfo.get(bossID).setActivated(false);
                     message.reply("> " + bossName + " 타이머 제거 완료");
+
+                }else if(command[1].equals("멍")){
+                    int restTime = bossInfo.get(bossID).getBossRestTime();
+                    restTime += bossInfo.get(bossID).getBossInterval(); // 젠시간 합산
+                    bossInfo.get(bossID).setBossRestTime(restTime);
+                    message.reply("> " + bossName + " 멍타임 적용 완료");
                 }
             }
             public void onFailure(Throwable t) {
